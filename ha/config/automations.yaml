@@ -1,0 +1,68 @@
+- id: '1684703376299'
+  alias: Power on LG TV
+  description: Power on the main living room TV
+  trigger:
+  - platform: device
+    device_id: 9da212e6abf5c6272b4d5c9359565f3c
+    domain: webostv
+    type: webostv.turn_on
+  condition: []
+  action:
+  - service: wake_on_lan.send_magic_packet
+    data:
+      mac: 20:17:42:72:DD:D9
+  mode: single
+- id: '1684955651080'
+  alias: Water leak notification
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.water_leak
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_matans_iphone
+    data:
+      message: Water leak at {{ trigger.name }}
+      title: Wate leak
+  - service: notify.mobile_app_hen_s_galaxy
+    data:
+      message: Water leak at {{ trigger.name }}
+      title: Water leak
+      data:
+        '[object Object]':
+    enabled: true
+  mode: single
+- id: '1685172148575'
+  alias: Storage door notification
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.storage_door_contact
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_matans_iphone
+    data:
+      message: Sotorage door is open
+  - service: notify.mobile_app_hen_s_galaxy
+    data:
+      message: Storage door is open
+  mode: single
+- id: '1685305554885'
+  alias: Apply default theme
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      mode: dark
+      name: noctis
+  mode: single

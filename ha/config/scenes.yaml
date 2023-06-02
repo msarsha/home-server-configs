@@ -1,0 +1,206 @@
+- id: '1684506792284'
+  name: החשך משרד
+  entities:
+    switch.office_light:
+      friendly_name: Office light switch
+      state: 'on'
+    cover.office_blinds:
+      current_position: 35
+      friendly_name: Office Blinds
+      supported_features: 15
+      state: open
+  icon: mdi:brightness-6
+  metadata: {}
+- id: '1684698877942'
+  name: Movie night
+  entities:
+    media_player.denon_avr_x3600h:
+      source_list:
+      - AUX1
+      - AUX2
+      - Bluetooth
+      - CBL/SAT
+      - CD
+      - DVD
+      - HEOS Music
+      - Media Player
+      - Phono
+      - PlayStation 4
+      - SHIELD
+      - TV Audio
+      - Tuner
+      sound_mode_list:
+      - MUSIC
+      - MOVIE
+      - GAME
+      - AUTO
+      - STANDARD
+      - VIRTUAL
+      - MATRIX
+      - ROCK ARENA
+      - JAZZ CLUB
+      - VIDEO GAME
+      - MONO MOVIE
+      - DIRECT
+      - PURE DIRECT
+      - DOLBY DIGITAL
+      - DTS SURROUND
+      - AURO3D
+      - MCH STEREO
+      - STEREO
+      - ALL ZONE STEREO
+      friendly_name: Denon AVR-X3600H
+      supported_features: 69004
+      volume_level: 0.2
+      is_volume_muted: false
+      media_content_type: channel
+      media_title: SHIELD
+      source: SHIELD
+      sound_mode: DOLBY DIGITAL
+      sound_mode_raw: Dolby Audio - Dolby Surround
+      state: 'on'
+    remote.shield:
+      activity_list:
+      current_activity: com.google.android.tvlauncher
+      friendly_name: SHIELD
+      supported_features: 4
+      state: 'on'
+    switch.lilving_room_light_switch_left:
+      friendly_name: Lilving Room Light Switch left
+      state: 'off'
+    switch.lilving_room_light_right:
+      friendly_name: Lilving Room Light Switch right
+      state: 'on'
+    switch.dinning_room:
+      friendly_name: Dinning Room Switch
+      state: 'on'
+    switch.kitchen_light:
+      friendly_name: Kitchen Light Switch
+      state: 'off'
+    switch.office_light:
+      friendly_name: Office light switch
+      state: 'off'
+    media_player.lg_tv:
+      source_list:
+      - 12+
+      - Apple TV
+      - Disney+
+      - HDMI 1
+      - HDMI 3
+      - HDMI 4
+      - Highbrow
+      - LG Content Store
+      - Live TV
+      - Netflix
+      - PS4
+      - Plex
+      - Prime Video
+      - SS IPTV
+      - Spotify - Music and Podcasts
+      - TV Hockey 2
+      - Twitch
+      - 'Yes'
+      - YouTube
+      - דפדפן אינטרנט
+      - מוסיקה
+      - רכיב
+      - תמונות ווידאו
+      assumed_state: true
+      device_class: tv
+      friendly_name: LG TV
+      supported_features: 24509
+      volume_level: 0.06
+      is_volume_muted: false
+      source: PS4
+      sound_output: tv_speaker
+      state: 'on'
+  icon: mdi:movie
+  metadata: {}
+- id: '1684775634178'
+  name: Go to sleep
+  entities:
+    media_player.lg_tv:
+      source_list:
+      - 12+
+      - Apple TV
+      - Disney+
+      - HDMI 1
+      - HDMI 3
+      - HDMI 4
+      - Highbrow
+      - LG Content Store
+      - Live TV
+      - Netflix
+      - PS4
+      - Plex
+      - Prime Video
+      - SS IPTV
+      - Spotify - Music and Podcasts
+      - TV Hockey 2
+      - Twitch
+      - 'Yes'
+      - YouTube
+      - דפדפן אינטרנט
+      - מוסיקה
+      - רכיב
+      - תמונות ווידאו
+      assumed_state: true
+      device_class: tv
+      friendly_name: LG TV
+      supported_features: 24509
+      state: 'off'
+    switch.office_light:
+      friendly_name: Office light switch
+      state: 'off'
+    switch.kitchen_light:
+      friendly_name: Kitchen Light Switch
+      state: 'off'
+    switch.dinning_room:
+      friendly_name: Dinning Room Switch
+      state: 'off'
+    media_player.denon_avr_x3600h:
+      source_list:
+      - AUX1
+      - AUX2
+      - Bluetooth
+      - CBL/SAT
+      - CD
+      - DVD
+      - HEOS Music
+      - Media Player
+      - Phono
+      - PlayStation 4
+      - SHIELD
+      - TV Audio
+      - Tuner
+      sound_mode_list:
+      - MUSIC
+      - MOVIE
+      - GAME
+      - AUTO
+      - STANDARD
+      - VIRTUAL
+      - MATRIX
+      - ROCK ARENA
+      - JAZZ CLUB
+      - VIDEO GAME
+      - MONO MOVIE
+      - DIRECT
+      - PURE DIRECT
+      - DOLBY DIGITAL
+      - DTS SURROUND
+      - AURO3D
+      - MCH STEREO
+      - STEREO
+      - ALL ZONE STEREO
+      friendly_name: Denon AVR-X3600H
+      supported_features: 69004
+      state: 'off'
+    remote.shield:
+      activity_list:
+      current_activity: com.android.dreams.basic
+      friendly_name: SHIELD
+      supported_features: 4
+      state: 'off'
+  icon: mdi:sleep
+  metadata: {}

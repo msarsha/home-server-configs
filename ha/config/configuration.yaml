@@ -1,0 +1,86 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+  
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 172.16.0.0/12
+    - ::1
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+wake_on_lan:
+panel_iframe:
+  portainer:
+    title: "Portainer"
+    url: "https://192.168.0.100:9443"
+    icon: mdi:docker
+    require_admin: true
+  zigbee2mqtt:
+    title: "Zigbee2mqtt"
+    url: "https://zigbee.sarsha.co.il"
+    icon: mdi:zigbee
+    require_admin: true
+  vscode:
+    title: "VSCode"
+    url: "http://192.168.0.100:8443"
+    icon: mdi:microsoft-visual-studio-code
+    require_admin: true
+  duplicati:
+    title: "Duplicati"
+    url: "http://192.168.0.100:8200"
+    icon: mdi:cloud-upload-outline
+    require_admin: true
+
+climate:
+  - platform: electrasmart
+    imei: !secret electra_imei
+    token: !secret electra_token
+    scan_interval: 15
+    acs:
+      - id: 151548
+        name: ParentsAC
+
+  - platform: electrasmart
+    imei: !secret electra_imei
+    token: !secret electra_token
+    scan_interval: 15
+    acs:
+      - id: 151702
+        name: SagiAC
+
+  - platform: electrasmart
+    imei: !secret electra_imei
+    token: !secret electra_token
+    scan_interval: 15
+    acs:
+      - id: 151703
+        name: NirAC
+
+  - platform: electrasmart
+    imei: !secret electra_imei
+    token: !secret electra_token
+    scan_interval: 15
+    acs:
+      - id: 151704
+        name: GilAC
+
+  - platform: electrasmart
+    imei: !secret electra_imei
+    token: !secret electra_token
+    scan_interval: 15
+    acs:
+      - id: 151549
+        name: OfficeAC
