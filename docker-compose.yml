@@ -92,21 +92,6 @@ services:
     restart: unless-stopped
     command: tunnel run --token ${CLOUDFLARE_TOKEN}
 
-  # duplicati:
-  #   image: lscr.io/linuxserver/duplicati:latest
-  #   container_name: duplicati
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Asia/Jerusalem
-  #   volumes:
-  #     - ${DOCKER_PATH}/duplicati/config:/config
-  #     - ${NAS_PATH}/ha_backup:/ha_backup
-  #     - ${DOCKER_PATH}:/source
-  #   ports:
-  #     - 8200:8200
-  #   restart: unless-stopped
-
   duplicati:
     image: duplicati/duplicati
     container_name: duplicati
