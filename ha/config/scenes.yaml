@@ -5,9 +5,9 @@
       friendly_name: Office light switch
       state: 'on'
     cover.office_blinds:
-      current_position: 35
-      friendly_name: Office Blinds
+      friendly_name: Office blinds
       supported_features: 15
+      current_position: 61
       state: open
   icon: mdi:brightness-6
   metadata: {}
