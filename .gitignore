@@ -4,6 +4,7 @@ duplicati/
 ha/config/.HA_VERSION
 ha/config/.storage/
 ha/config/blueprints/
+ha/config/backups/
 ha/config/custom_components/
 ha/config/home-assistant.log
 ha/config/home-assistant.log.1

@@ -66,3 +66,19 @@
       mode: dark
       name: noctis
   mode: single
+- id: '1687168312419'
+  alias: 'Ac active count increment '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - group.climate
+    to:
+    from: 'off'
+  condition: []
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.active_air_conditioning
+  mode: single

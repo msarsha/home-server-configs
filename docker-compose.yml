@@ -205,7 +205,7 @@ services:
     restart: unless-stopped
   
   plex-meta-manager:
-    image: meisnate12/plex-meta-manager
+    image: meisnate12/plex-meta-manager:nightly
     container_name: plex-meta-manager
     environment:
       - TZ=Asia/Jerusalem 

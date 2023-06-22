@@ -8,6 +8,11 @@ frontend:
 # Text to speech
 tts:
   - platform: google_translate
+
+lovelace:
+  resources:
+  - url: /local/vacuum-card.js
+    type: module
   
 http:
   use_x_forwarded_for: true
@@ -21,6 +26,8 @@ http:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+sensor: !include sensors.yaml
+
 wake_on_lan:
 panel_iframe:
   portainer:

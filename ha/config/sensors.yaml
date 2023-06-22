@@ -1,0 +1,6 @@
+- platform: template
+  sensors:
+    ac_on_count:
+      friendly_name: "Number of active ACs"
+      value_template: >
+        {{ states.climate | selectattr('state', 'ne', 'off') | list | count }}
