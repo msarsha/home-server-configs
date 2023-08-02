@@ -118,6 +118,7 @@ services:
     volumes:
       - ${DOCKER_PATH}/qbittorrent/config:/config
       - ${NAS_PATH}/torrents:/torrents
+      - ${NAS_PATH}/media:/media
     ports:
       - 8090:8090
       - 6881:6881
@@ -178,19 +179,7 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
-
-  searcharr:
-    container_name: searcharr
-    image: toddrob/searcharr:latest
-    volumes:
-      - ${DOCKER_PATH}/searcharr/data:/app/data
-      - ${DOCKER_PATH}/searcharr/logs:/app/logs
-      - ${DOCKER_PATH}/searcharr/settings.py:/app/settings.py
-    environment:
-      - TZ=Asia/Jerusalem
-    restart: unless-stopped
-    network_mode: host
-
+    
   overseerr:
     image: sctx/overseerr:latest
     container_name: overseerr

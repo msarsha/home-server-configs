@@ -66,19 +66,66 @@
       mode: dark
       name: noctis
   mode: single
-- id: '1687168312419'
-  alias: 'Ac active count increment '
+- id: '1690735672187'
+  alias: Bathroom light - activate by motion
   description: ''
   trigger:
   - platform: state
     entity_id:
-    - group.climate
-    to:
+    - binary_sensor.bathroom_motion_sensor_occupancy
     from: 'off'
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.bathroom_motion_sensor_illuminance_lux
+    below: 90
+  action:
+  - type: turn_on
+    device_id: 9700798447239bb9c80eb4fd137b5d23
+    entity_id: da3b36ca0ef97d1533dcd552c5b054fd
+    domain: switch
+  mode: single
+- id: '1690737637122'
+  alias: Bathroom light - turn off when no motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroom_motion_sensor_occupancy
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
   condition: []
   action:
-  - service: counter.increment
-    data: {}
-    target:
-      entity_id: counter.active_air_conditioning
+  - type: turn_off
+    device_id: 9700798447239bb9c80eb4fd137b5d23
+    entity_id: da3b36ca0ef97d1533dcd552c5b054fd
+    domain: switch
+  mode: single
+- id: '1690898247747'
+  alias: Parents bathroom switch - activate by motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.parents_bathroom_motion_sensor_occupancy
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 3
+  condition:
+  - condition: time
+    after: '21:30:00'
+    enabled: true
+    before: 05:00:00
+  action:
+  - type: turn_on
+    device_id: 400f69dff063dbf370f67c2c4abf2f76
+    entity_id: d3f62b4de75a868e5f800b009e067805
+    domain: light
   mode: single

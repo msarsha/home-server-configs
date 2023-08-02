@@ -1,0 +1,9 @@
+turn_off_lg_tv:
+  alias: Turn off LG TV
+  sequence:
+  - service: webostv.command
+    data:
+      entity_id: media_player.lg_tv
+      command: system/turnOff
+  mode: single
+  icon: mdi:television-off
