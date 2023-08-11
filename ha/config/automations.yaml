@@ -36,7 +36,7 @@
     enabled: true
   mode: single
 - id: '1685172148575'
-  alias: Storage door notification
+  alias: '[Notify] - Storage door open'
   description: ''
   trigger:
   - platform: state
@@ -49,9 +49,20 @@
   - service: notify.mobile_app_matans_iphone
     data:
       message: Sotorage door is open
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
   - service: notify.mobile_app_hen_s_galaxy
     data:
       message: Storage door is open
+      data:
+        ttl: 0
+        priority: high
+        channel: alarm_stream
+        tts_text: Storage door is open
   mode: single
 - id: '1685305554885'
   alias: Apply default theme

@@ -7,3 +7,27 @@ turn_off_lg_tv:
       command: system/turnOff
   mode: single
   icon: mdi:television-off
+living_room_ac_turn_on:
+  alias: Living room AC turn on
+  sequence:
+  - service: remote.send_command
+    data:
+      delay_secs: 0.4
+      device: livingroom_ac
+      command: power_on
+    target:
+      entity_id: remote.broadlink_rm_pro
+  mode: single
+  icon: mdi:fan
+living_room_ac_turn_off:
+  alias: Living room AC turn off
+  sequence:
+  - service: remote.send_command
+    data:
+      delay_secs: 0.4
+      device: livingroom_ac
+      command: power_off
+    target:
+      entity_id: remote.broadlink_rm_pro
+  mode: single
+  icon: mdi:fan-off
