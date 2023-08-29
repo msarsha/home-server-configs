@@ -13,7 +13,7 @@
       mac: 20:17:42:72:DD:D9
   mode: single
 - id: '1684955651080'
-  alias: Water leak notification
+  alias: '[Notify] - Water leak'
   description: ''
   trigger:
   - platform: state
@@ -23,17 +23,14 @@
     to: 'on'
   condition: []
   action:
-  - service: notify.mobile_app_matans_iphone
+  - service: notify.mobile_app_matan_s23
     data:
       message: Water leak at {{ trigger.name }}
       title: Wate leak
-  - service: notify.mobile_app_hen_s_galaxy
+  - service: notify.mobile_app_hen_s23
     data:
       message: Water leak at {{ trigger.name }}
       title: Water leak
-      data:
-        '[object Object]':
-    enabled: true
   mode: single
 - id: '1685172148575'
   alias: '[Notify] - Storage door open'
@@ -46,26 +43,16 @@
     to: 'on'
   condition: []
   action:
-  - service: notify.mobile_app_matans_iphone
-    data:
-      message: Sotorage door is open
-      data:
-        push:
-          sound:
-            name: default
-            critical: 1
-            volume: 1
-  - service: notify.mobile_app_hen_s_galaxy
+  - service: notify.mobile_app_matan_s23
     data:
       message: Storage door is open
-      data:
-        ttl: 0
-        priority: high
-        channel: alarm_stream
-        tts_text: Storage door is open
+  - service: notify.mobile_app_hen_s23
+    data:
+      message: Storage door is open
+    enabled: true
   mode: single
 - id: '1685305554885'
-  alias: Apply default theme
+  alias: '[Startup] - Apply default theme'
   description: ''
   trigger:
   - platform: homeassistant
@@ -78,7 +65,7 @@
       name: noctis
   mode: single
 - id: '1690735672187'
-  alias: Bathroom light - activate by motion
+  alias: '[Motion] - Turn on bathroom light'
   description: ''
   trigger:
   - platform: state
@@ -97,7 +84,7 @@
     domain: switch
   mode: single
 - id: '1690737637122'
-  alias: Bathroom light - turn off when no motion
+  alias: '[Motion] Turn off bathroom light '
   description: ''
   trigger:
   - platform: state
@@ -117,7 +104,7 @@
     domain: switch
   mode: single
 - id: '1690898247747'
-  alias: Parents bathroom switch - activate by motion
+  alias: '[Motion] - Turn on parents bathroom LED'
   description: ''
   trigger:
   - platform: state
@@ -128,15 +115,37 @@
     for:
       hours: 0
       minutes: 0
-      seconds: 3
+      seconds: 0
+  - type: motion
+    platform: device
+    device_id: 8980b06e19a58d5623a2f86d18baa332
+    entity_id: d55fe80f0fe3f7fb86436c54db089a6a
+    domain: binary_sensor
   condition:
   - condition: time
-    after: '21:30:00'
+    after: '20:00:00'
     enabled: true
-    before: 05:00:00
+    before: 06:00:00
   action:
   - type: turn_on
-    device_id: 400f69dff063dbf370f67c2c4abf2f76
-    entity_id: d3f62b4de75a868e5f800b009e067805
+    device_id: 8d295f7e94d98f23db6c37d11166633d
+    entity_id: ad4c403daa105bc6586da91267e7528d
+    domain: light
+    brightness_pct: 1
+  mode: single
+- id: '1692436824869'
+  alias: '[Motion] - Turn off parents bathroom LED'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.parents_bathrom_presence_ld1125h_occupancy_or_movement
+    from:
+    to: 'off'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 8d295f7e94d98f23db6c37d11166633d
+    entity_id: ad4c403daa105bc6586da91267e7528d
     domain: light
   mode: single
