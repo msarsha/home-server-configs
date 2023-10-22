@@ -13,6 +13,8 @@ lovelace:
   resources:
   - url: /local/vacuum-card.js
     type: module
+  - url: /local/room-card.js
+    type: module
   
 http:
   use_x_forwarded_for: true
@@ -49,6 +51,11 @@ panel_iframe:
     title: "Duplicati"
     url: "http://192.168.0.100:8200"
     icon: mdi:cloud-upload-outline
+    require_admin: true
+  esphome:
+    title: "ESPHome"
+    url: "http://192.168.0.100:6052"
+    icon: mdi:home-automation
     require_admin: true
 
 climate:

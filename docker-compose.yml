@@ -35,7 +35,7 @@ services:
       - VERSION=docker
     volumes:
       - ${DOCKER_PATH}/plex-config:/config
-      - ${NAS_PATH}/media:/media
+      - ${NAS_PATH_1}/media:/media
     restart: unless-stopped
 
   mqtt:
@@ -101,7 +101,7 @@ services:
       - TZ=Asia/Jerusalem
     volumes:
       - ${DOCKER_PATH}/duplicati/data:/data
-      - ${NAS_PATH}/ha_backup:/ha_backup
+      - ${NAS_PATH_1}/ha_backup:/ha_backup
       - ${DOCKER_PATH}:/source
     ports:
       - 8200:8200
@@ -117,8 +117,8 @@ services:
       - WEBUI_PORT=8090
     volumes:
       - ${DOCKER_PATH}/qbittorrent/config:/config
-      - ${NAS_PATH}/torrents:/torrents
-      - ${NAS_PATH}/media:/media
+      - ${NAS_PATH_1}/torrents:/torrents
+      - ${NAS_PATH_1}/media:/media
     ports:
       - 8090:8090
       - 6881:6881
@@ -134,7 +134,7 @@ services:
       - TZ=Asia/Jerusalem
     volumes:
       - ${DOCKER_PATH}/radarr/config:/config
-      - ${NAS_PATH}/:/shared
+      - ${NAS_PATH_1}/:/shared
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -148,7 +148,7 @@ services:
       - TZ=Asia/Jerusalem
     volumes:
       - ${DOCKER_PATH}/sonarr/config:/config
-      - ${NAS_PATH}/:/shared
+      - ${NAS_PATH_1}/:/shared
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -175,7 +175,7 @@ services:
       - TZ=Asia/Jerusalem
     volumes:
       - ${DOCKER_PATH}/bazarr/config:/config
-      - ${NAS_PATH}/:/shared
+      - ${NAS_PATH_1}/:/shared
     ports:
       - 6767:6767
     restart: unless-stopped

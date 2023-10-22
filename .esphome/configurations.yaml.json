@@ -1,0 +1,15 @@
+{
+  "storage_version": 1,
+  "name": "esphome",
+  "friendly_name": "esphome",
+  "comment": null,
+  "esphome_version": null,
+  "src_version": 1,
+  "address": "esphome.local",
+  "web_port": null,
+  "esp_platform": "ESP32",
+  "build_path": null,
+  "firmware_bin_path": null,
+  "loaded_integrations": [],
+  "no_mdns": false
+}
