@@ -36,6 +36,7 @@ services:
     volumes:
       - ${DOCKER_PATH}/plex-config:/config
       - ${NAS_PATH_1}/media:/media
+      - ${NAS_PATH_2}/media:/media2
     restart: unless-stopped
 
   mqtt:
@@ -135,6 +136,7 @@ services:
     volumes:
       - ${DOCKER_PATH}/radarr/config:/config
       - ${NAS_PATH_1}/:/shared
+      - ${NAS_PATH_2}/:/media2
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -149,6 +151,7 @@ services:
     volumes:
       - ${DOCKER_PATH}/sonarr/config:/config
       - ${NAS_PATH_1}/:/shared
+      - ${NAS_PATH_2}/:/media2
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -176,6 +179,7 @@ services:
     volumes:
       - ${DOCKER_PATH}/bazarr/config:/config
       - ${NAS_PATH_1}/:/shared
+      - ${NAS_PATH_2}/:/media2
     ports:
       - 6767:6767
     restart: unless-stopped
