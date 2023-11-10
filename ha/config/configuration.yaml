@@ -57,6 +57,11 @@ panel_iframe:
     url: "http://192.168.0.100:6052"
     icon: mdi:home-automation
     require_admin: true
+  speedtest:
+    title: "Speedtest"
+    url: "https://192.168.0.100:3001"
+    icon: mdi:speedometer
+    require_admin: true
 
 climate:
   - platform: electrasmart

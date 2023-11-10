@@ -65,7 +65,7 @@
       name: noctis
   mode: single
 - id: '1690898247747'
-  alias: '[Motion] - Turn on parents bathroom LED'
+  alias: '[Motion] - Parents bathroom LED On\Off'
   description: ''
   trigger:
   - platform: state
@@ -77,134 +77,198 @@
       hours: 0
       minutes: 0
       seconds: 0
+    id: parents_bathroom_motion_detected
   - type: occupied
     platform: device
     device_id: 8980b06e19a58d5623a2f86d18baa332
     entity_id: cf40d72b78eb93ac41a1e5dc72083999
     domain: binary_sensor
+    id: parents_bathroom_occupancy_detected
+  - type: not_occupied
+    platform: device
+    device_id: 8980b06e19a58d5623a2f86d18baa332
+    entity_id: cf40d72b78eb93ac41a1e5dc72083999
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+    id: parents_bathroom_no_occupancy
   condition:
   - condition: sun
     before: sunrise
     after: sunset
     enabled: true
   action:
-  - type: turn_on
-    device_id: 8d295f7e94d98f23db6c37d11166633d
-    entity_id: ad4c403daa105bc6586da91267e7528d
-    domain: light
-    brightness_pct: 1
-  mode: single
-- id: '1692436824869'
-  alias: '[Motion] - Turn off parents bathroom LED'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.parents_bathrom_presence_ld1125h_occupancy_or_movement
-    from: 'on'
-    to: 'off'
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 8d295f7e94d98f23db6c37d11166633d
-    entity_id: ad4c403daa105bc6586da91267e7528d
-    domain: light
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - parents_bathroom_motion_detected
+        - parents_bathroom_occupancy_detected
+      sequence:
+      - type: turn_on
+        device_id: 8d295f7e94d98f23db6c37d11166633d
+        entity_id: ad4c403daa105bc6586da91267e7528d
+        domain: light
+        brightness_pct: 1
+    - conditions:
+      - condition: trigger
+        id:
+        - parents_bathroom_no_occupancy
+      sequence:
+      - type: turn_off
+        device_id: 8d295f7e94d98f23db6c37d11166633d
+        entity_id: ad4c403daa105bc6586da91267e7528d
+        domain: light
   mode: single
 - id: '1694193356542'
-  alias: '[Motion] - Turn on bathroom light'
+  alias: '[Motion] - MaIn bathroom light On\Off'
   description: ''
   trigger:
   - platform: state
     entity_id:
     - binary_sensor.main_bathroom_presence_ld1125h_occupancy_or_movement
-    from:
+    from: 'off'
     to: 'on'
     for:
       hours: 0
       minutes: 0
       seconds: 0
-  condition:
-  - condition: sun
-    before: sunrise
-    after: sunset
-    enabled: false
-  action:
-  - type: turn_on
-    device_id: 9700798447239bb9c80eb4fd137b5d23
-    entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
-    domain: light
-  mode: single
-- id: '1694193434232'
-  alias: '[Motion] - Turn off bathroom light'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.main_bathroom_presence_ld1125h_occupancy_or_movement
-    from: 'on'
-    to: 'off'
+    id: occupancy_detected
+  - type: motion
+    platform: device
+    device_id: f833657afd2a39c49f299d2b02418fb2
+    entity_id: 472ebd8011923fe95e3d2e575a7a4bb3
+    domain: binary_sensor
+    id: motion_detected
+  - type: not_occupied
+    platform: device
+    device_id: 88a7e45d9e4a6283bb6f5724fe4eb4b5
+    entity_id: b1400796cdcc5f2758d9ebaf2ead2ad1
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 15
+    id: no_occupancy
+  - type: no_motion
+    platform: device
+    device_id: f833657afd2a39c49f299d2b02418fb2
+    entity_id: 472ebd8011923fe95e3d2e575a7a4bb3
+    domain: binary_sensor
+    id: no_motion
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 15
   condition: []
   action:
-  - type: turn_off
-    device_id: 9700798447239bb9c80eb4fd137b5d23
-    entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
-    domain: light
-  - type: turn_off
-    device_id: 9700798447239bb9c80eb4fd137b5d23
-    entity_id: c236faa3c78205fefa7d0ec5a02fc29b
-    domain: light
+  - choose:
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id:
+          - occupancy_detected
+        - condition: trigger
+          id:
+          - motion_detected
+      sequence:
+      - type: turn_on
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
+        domain: light
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: trigger
+          id:
+          - no_occupancy
+        - condition: trigger
+          id:
+          - no_motion
+      sequence:
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: 1e633dfdc747b123879a6765fa559fa3
+        domain: light
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
+        domain: light
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: c236faa3c78205fefa7d0ec5a02fc29b
+        domain: light
   mode: single
 - id: '1696092829450'
-  alias: '[Sunset] - turn on tv counter led'
+  alias: '[Sun] - TV counter led On\Off'
   description: ''
   trigger:
   - platform: sun
     event: sunset
     offset: 0
+    id: sunset
+  - platform: sun
+    event: sunrise
+    offset: 0
+    id: sunrise
   condition: []
   action:
   - service: light.turn_on
     data: {}
     target:
       entity_id: light.wled_tv_counter
-  mode: single
-- id: '1696093001946'
-  alias: '[Sunrise] - turn off tv counter led'
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunrise
-    offset: 0
-  condition: []
-  action:
-  - service: light.turn_off
-    data: {}
-    target:
-      entity_id: light.wled_tv_counter
-  mode: single
-- id: '1697396037927'
-  alias: '[Time] - Turn off living room TV '
-  description: ''
-  trigger:
-  - platform: time
-    at: 06:00:00
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 42b83ade3def14a661eec3d107164ba9
-    entity_id: 7cd0d46b3df7f185433c1eab0b7e02d5
-    domain: switch
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - sunset
+      sequence:
+      - type: turn_on
+        device_id: 17ad5a48f112c9a6189d729db701b302
+        entity_id: 41bb32b2b759a8e7450a7714eb7b379b
+        domain: light
+    - conditions:
+      - condition: trigger
+        id:
+        - sunrise
+      sequence:
+      - type: turn_off
+        device_id: 17ad5a48f112c9a6189d729db701b302
+        entity_id: 41bb32b2b759a8e7450a7714eb7b379b
+        domain: light
   mode: single
 - id: '1697396097180'
-  alias: '[Time] - Turn on living room TV '
+  alias: '[Time] - Living room TV morning protection'
   description: ''
   trigger:
   - platform: time
     at: 08:30:00
+    id: turn_on_time
+  - platform: time
+    at: 06:30:00
+    id: turn_off_time
   condition: []
   action:
-  - type: turn_on
-    device_id: 42b83ade3def14a661eec3d107164ba9
-    entity_id: 7cd0d46b3df7f185433c1eab0b7e02d5
-    domain: switch
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - turn_on_time
+      sequence:
+      - type: turn_on
+        device_id: 42b83ade3def14a661eec3d107164ba9
+        entity_id: 7cd0d46b3df7f185433c1eab0b7e02d5
+        domain: switch
+    - conditions:
+      - condition: trigger
+        id:
+        - turn_off_time
+      sequence:
+      - type: turn_off
+        device_id: 42b83ade3def14a661eec3d107164ba9
+        entity_id: 7cd0d46b3df7f185433c1eab0b7e02d5
+        domain: switch
   mode: single
