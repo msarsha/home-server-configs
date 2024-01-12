@@ -5,6 +5,7 @@ services:
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
       - ${DOCKER_PATH}/ha/config:/config
+      - ${DOCKER_PATH}/ha/stuff:/stuff
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true

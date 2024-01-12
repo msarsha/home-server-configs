@@ -177,29 +177,7 @@
       sequence:
       - type: turn_on
         device_id: 9700798447239bb9c80eb4fd137b5d23
-        entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
-        domain: light
-    - conditions:
-      - condition: and
-        conditions:
-        - condition: trigger
-          id:
-          - no_occupancy
-        - condition: trigger
-          id:
-          - no_motion
-      sequence:
-      - type: turn_off
-        device_id: 9700798447239bb9c80eb4fd137b5d23
-        entity_id: 1e633dfdc747b123879a6765fa559fa3
-        domain: light
-      - type: turn_off
-        device_id: 9700798447239bb9c80eb4fd137b5d23
-        entity_id: e1fd4c1a9793ee9a2abd9c58ffeb4d50
-        domain: light
-      - type: turn_off
-        device_id: 9700798447239bb9c80eb4fd137b5d23
-        entity_id: c236faa3c78205fefa7d0ec5a02fc29b
+        entity_id: 6612f42484e0670192954f8b2747205f
         domain: light
   mode: single
 - id: '1696092829450'
@@ -245,7 +223,7 @@
   description: ''
   trigger:
   - platform: time
-    at: 08:30:00
+    at: '19:30:00'
     id: turn_on_time
   - platform: time
     at: 06:30:00
@@ -270,5 +248,78 @@
       - type: turn_off
         device_id: 42b83ade3def14a661eec3d107164ba9
         entity_id: 7cd0d46b3df7f185433c1eab0b7e02d5
+        domain: switch
+  mode: single
+- id: '1703401860070'
+  alias: TEST MOTION
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.main_bathroom_presence_ld1125h_occupancy_or_movement
+    from:
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    id: occupancy_detected
+  - type: motion
+    platform: device
+    device_id: f833657afd2a39c49f299d2b02418fb2
+    entity_id: 472ebd8011923fe95e3d2e575a7a4bb3
+    domain: binary_sensor
+    id: motion_detected
+  - type: not_occupied
+    platform: device
+    device_id: 88a7e45d9e4a6283bb6f5724fe4eb4b5
+    entity_id: b1400796cdcc5f2758d9ebaf2ead2ad1
+    domain: binary_sensor
+    id: no_occupancy
+  - type: no_motion
+    platform: device
+    device_id: f833657afd2a39c49f299d2b02418fb2
+    entity_id: 472ebd8011923fe95e3d2e575a7a4bb3
+    domain: binary_sensor
+    id: no_motion
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 15
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id:
+          - occupancy_detected
+        - condition: trigger
+          id:
+          - motion_detected
+      sequence:
+      - type: turn_on
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: 6612f42484e0670192954f8b2747205f
+        domain: light
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: trigger
+          id:
+          - no_occupancy
+      sequence:
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: 6612f42484e0670192954f8b2747205f
+        domain: light
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: cb8d8115623fe7b13182a8381f1d9bf0
+        domain: light
+      - type: turn_off
+        device_id: 9700798447239bb9c80eb4fd137b5d23
+        entity_id: 96c0a6f417ed9f03bcf3d2756a12f5bc
         domain: switch
   mode: single

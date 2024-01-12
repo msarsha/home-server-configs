@@ -17,6 +17,7 @@ ha/config/ip_bans.yaml
 ha/config/secrets.yaml
 ha/config/themes/
 ha/config/tts/
+ha/config/stuff/
 ha/config/www/
 mosquitto/
 overseerr/
