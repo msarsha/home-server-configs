@@ -323,3 +323,31 @@
         entity_id: 96c0a6f417ed9f03bcf3d2756a12f5bc
         domain: switch
   mode: single
+- id: '1705161336315'
+  alias: '[Notify] - doorbell visitor'
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 4a536e3e9446cdd9d9ff4467023eca1b
+    entity_id: 9cd119a6b37944e62b13c27b7998319f
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.mobile_app_matan_s23
+    data:
+      data:
+        actions:
+        - action: URI
+          title: פתח מצלמה
+          uri: /dashboard-home/cameras
+      message: צלצול בדלת
+  - service: notify.mobile_app_hen_s23
+    data:
+      data:
+        actions:
+        - action: URI
+          title: פתח מצלמה
+          uri: /dashboard-home/cameras
+      message: צלצול בדלת
+  mode: single
