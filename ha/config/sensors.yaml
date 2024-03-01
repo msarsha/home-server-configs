@@ -1,6 +1,24 @@
 - platform: template
   sensors:
-    ac_on_count:
-      friendly_name: "Number of active ACs"
+    next_movie_selector:
+      friendly_name: "Next Movie Selector"
       value_template: >
-        {{ states.climate | selectattr('state', 'ne', 'off') | list | count }}
+        {% set now = as_timestamp(now()) %}
+        {% set friday = (now | timestamp_custom("%w") | int) == 5 %}
+        {% set saturday = (now | timestamp_custom("%w") | int) == 6 %}
+        {% set current_week = now | timestamp_custom("%U") | int %}
+        {% set current_year = now | timestamp_custom("%Y") | int %}
+        {% set current_day = now | timestamp_custom("%d") | int %}
+        {% set current_month = now | timestamp_custom("%m") | int %}
+        {% if (friday and current_day <= 7) or (saturday and current_day > 7) %}
+          {% set next_selector = "שגיא" %}
+        {% elif (saturday and current_day <= 7) or (friday and current_day > 7) %}
+          {% set next_selector = "ניר" %}
+        {% else %}
+          {% set next_selector = "גיל" %}
+        {% endif %}
+        {{ next_selector }}
+    # ac_on_count:
+    #   friendly_name: "Number of active ACs"
+    #   value_template: >
+    #     {{ states.climate | selectattr('state', 'ne', 'off') | list | count }}
